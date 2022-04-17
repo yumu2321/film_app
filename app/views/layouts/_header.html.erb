@@ -1,6 +1,6 @@
 
 <header class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-  <%= link_to 'Film First App', root_path, class: "navbar-brand" %>
+  <%= link_to 'イチ推し映画', root_path, class: "navbar-brand" %>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -9,15 +9,55 @@
 <!--// もしユーザーがログインしているならば下記を表示-->
       <%  if user_signed_in?  %>
         <li class="nav-item">
-          <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "nav-link" %>
+          <%= link_to "ホーム", destroy_user_session_path, method: :delete, class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "ランキング", destroy_user_session_path, method: :delete, class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "みんなのレビュー", destroy_user_session_path, method: :delete, class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <label class="open nav-link" for="pop-up">投稿</label>
+          <input type="checkbox" id="pop-up">
+          <div class="overlay">
+	          <div class="window">
+		          <label class="close" for="pop-up">キャンセル</label>
+		          <label class="post" for="pop-up">投稿</label>
+	          	<h5>イチ推し映画投稿</h5>
+	          	<p>タイトル</p>
+	          	<input type="text" class="text" name="title">
+		          <!--評価-->
+		          <div class="review">
+                <p>評価</p>
+                <div class="stars">
+                  <span>
+                    <input id="review01" type="radio" name="review"><label for="review01">★</label>
+                    <input id="review02" type="radio" name="review"><label for="review02">★</label>
+                    <input id="review03" type="radio" name="review"><label for="review03">★</label>
+                    <input id="review04" type="radio" name="review"><label for="review04">★</label>
+                    <input id="review05" type="radio" name="review"><label for="review05">★</label>
+                  </span>
+                </div>
+                <p>レビュー</p>
+                <textarea class="textarea" name="review"></textarea>
+              </div>
+	          </div>
+          </div>
+        </li>
+        <li class="nav-item">
+          <%= link_to "アカウント", destroy_user_session_path, method: :delete, class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "nav-link" %>
         </li>
 <!--//ログインしていないのなら下記を表示-->
       <% else %>
         <li class="nav-item">
-          <%= link_to "Sign up", new_user_registration_path, class: "nav-link" %>
+          <%= link_to "新規登録", new_user_registration_path, class: "nav-link" %>
         </li>
         <li class="nav-item">
-          <%= link_to "Log in", new_user_session_path, class: "nav-link" %>
+          <%= link_to "ログイン", new_user_session_path, class: "nav-link" %>
         </li>
       <% end %>
     </ul>
