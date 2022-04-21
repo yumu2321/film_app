@@ -14,6 +14,10 @@
     <%= render "layouts/flash" %>
     <main class="bg-home d-flex align-items-center w-100 h-100">
       <div class="container">
+        <% @posts.each do |post| %>
+          <p>タイトル</p>
+          <span><%= post.title %></span>
+        <% end %>
         <%= yield %>
       </div>
     </main>

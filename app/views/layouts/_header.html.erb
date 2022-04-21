@@ -43,14 +43,13 @@
           <input type="checkbox" id="pop-up">
           <div class="overlay">
 	          <div class="window">
-		          <label class="close" for="pop-up">キャンセル</label>
-		          <label class="post" for="pop-up">投稿</label>
 	          	<h5>イチ推し映画投稿</h5>
-	          	<p>タイトル</p>
-	          	<input type="text" class="text" name="title">
+	          	<%= form_for (@post) do |f| %>
+	          	<%= f.label :タイトル %><br>
+	          	<%= f.text_field :title, :size=>"80", autofocus: true %>
 		          <!--評価-->
 		          <div class="review">
-                <p>評価</p>
+                <%= f.label :評価 %><br>
                 <div class="stars">
                   <span>
                     <input id="review01" type="radio" name="review"><label for="review01">★</label>
@@ -60,9 +59,12 @@
                     <input id="review05" type="radio" name="review"><label for="review05">★</label>
                   </span>
                 </div>
-                <p>レビュー</p>
-                <textarea class="textarea" name="review"></textarea>
+                <%= f.label :レビュー %><br>
+                <%= f.text_area :review, :size=>"90x10" %>
               </div>
+              <label class="close" for="pop-up">キャンセル</label>
+		          <input type="submit" class="post" value="投稿">
+              <% end %>
 	          </div>
           </div>
         </li>
