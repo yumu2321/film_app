@@ -5,31 +5,51 @@
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav ml-auto">
+    <div>
+      <ul class="navbar-nav">
 <!--// もしユーザーがログインしているならば下記を表示-->
       <%  if user_signed_in?  %>
         <li class="nav-item">
-          <%= link_to "ホーム", destroy_user_session_path, method: :delete, class: "nav-link" %>
+          <%= link_to "アカウント", destroy_user_session_path, method: :delete, class: "nav-link" %>
         </li>
         <li class="nav-item">
-          <%= link_to "ランキング", destroy_user_session_path, method: :delete, class: "nav-link" %>
+          <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "nav-link" %>
+        </li>
+      </ul>
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <%= link_to root_path ,class: "btn btn-light text-white", method: :get do %>
+            <i class="fa fa-home fa-2x nav-link"></i>
+          <% end %>
+          <%= link_to "ホーム", root_path, class: "nav-link ml-1" %>
         </li>
         <li class="nav-item">
+          <%= link_to root_path ,class: "btn btn-light text-white", method: :get do %>
+            <i class="fa fa-trophy fa-2x nav-link ml-3"></i>
+          <% end %>
+          <%= link_to "ランキング", destroy_user_session_path, method: :delete, class: "nav-link ml-1" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to root_path ,class: "btn btn-light text-white", method: :get do %>
+            <i class="fa fa-comments fa-2x nav-link ml-4"></i>
+          <% end %>
           <%= link_to "みんなのレビュー", destroy_user_session_path, method: :delete, class: "nav-link" %>
         </li>
         <li class="nav-item">
-          <label class="open nav-link" for="pop-up">投稿</label>
+          <%= link_to root_path ,class: "btn btn-light text-white", method: :get do %>
+            <i class="fa fa-upload fa-2x nav-link"></i>
+          <% end %>
+          <label class="open nav-link ml-3" for="pop-up">投稿</label>
           <input type="checkbox" id="pop-up">
           <div class="overlay">
 	          <div class="window">
-		          <label class="close" for="pop-up">キャンセル</label>
-		          <label class="post" for="pop-up">投稿</label>
 	          	<h5>イチ推し映画投稿</h5>
-	          	<p>タイトル</p>
-	          	<input type="text" class="text" name="title">
+	          	<%= form_for (@post) do |f| %>
+	          	<%= f.label :タイトル %><br>
+	          	<%= f.text_field :title, :size=>"80", autofocus: true %>
 		          <!--評価-->
 		          <div class="review">
-                <p>評価</p>
+                <%= f.label :評価 %><br>
                 <div class="stars">
                   <span>
                     <input id="review01" type="radio" name="review"><label for="review01">★</label>
@@ -39,18 +59,18 @@
                     <input id="review05" type="radio" name="review"><label for="review05">★</label>
                   </span>
                 </div>
-                <p>レビュー</p>
-                <textarea class="textarea" name="review"></textarea>
+                <%= f.label :レビュー %><br>
+                <%= f.text_area :review, :size=>"90x10" %>
               </div>
+              <label class="close" for="pop-up">キャンセル</label>
+		          <input type="submit" class="post" value="投稿">
+              <% end %>
 	          </div>
           </div>
         </li>
-        <li class="nav-item">
-          <%= link_to "アカウント", destroy_user_session_path, method: :delete, class: "nav-link" %>
-        </li>
-        <li class="nav-item">
-          <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "nav-link" %>
-        </li>
+      </ul>
+    </div>
+    <ul class="navbar-nav mr-auto">
 <!--//ログインしていないのなら下記を表示-->
       <% else %>
         <li class="nav-item">
