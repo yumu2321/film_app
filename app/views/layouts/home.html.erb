@@ -17,6 +17,10 @@
         <% @posts.each do |post| %>
           <p>タイトル</p>
           <span><%= post.title %></span>
+          <p>評価</p>
+          <span><%= post.star %></span>
+          <p>レビュー</p>
+          <span><%= post.review %></span>
         <% end %>
         <%= yield %>
       </div>
