@@ -45,25 +45,29 @@
 	          <div class="window">
 	          	<h5>イチ推し映画投稿</h5>
 	          	<%= form_for (@post) do |f| %>
-	          	<%= f.label :タイトル %><br>
-	          	<%= f.text_field :title, :size=>"80", autofocus: true %>
-		          <!--評価-->
-		          <div class="review">
-                <%= f.label :評価 %><br>
-                <div class="stars">
-                  <span>
-                    <input id="review01" type="radio" name="review"><label for="review01">★</label>
-                    <input id="review02" type="radio" name="review"><label for="review02">★</label>
-                    <input id="review03" type="radio" name="review"><label for="review03">★</label>
-                    <input id="review04" type="radio" name="review"><label for="review04">★</label>
-                    <input id="review05" type="radio" name="review"><label for="review05">★</label>
-                  </span>
+  	          	<%= f.label :タイトル %><br>
+  	          	<%= f.text_field :title, :size=>"80", autofocus: true %>
+  		          <div class="review">
+                    <!-- 評価 -->
+                  <div class="form-group row" id="star">
+                    <%= f.label :star,'評価 ', class:'col-md-3 col-form-label' %><br>
+                    <%= f.hidden_field :star, id: :review_star %>
+                  </div>
+                
+                  <!-- 評価javascript -->
+                  <script>
+                  $('#star').raty({
+                    size     : 36,
+                    starOff:  '<%= asset_path('star-off.png') %>',
+                    starOn : '<%= asset_path('star-on.png') %>',
+                    scoreName: 'post[star]',
+                  });
+                  </script>  
+                  <%= f.label :レビュー %><br>
+                  <%= f.text_area :review, :size=>"90x10" %>
                 </div>
-                <%= f.label :レビュー %><br>
-                <%= f.text_area :review, :size=>"90x10" %>
-              </div>
-              <label class="close" for="pop-up">キャンセル</label>
-		          <input type="submit" class="post" value="投稿">
+                <label class="close" for="pop-up">キャンセル</label>
+  		          <%= f.submit '投稿する', class:"btn btn-success" %>
               <% end %>
 	          </div>
           </div>
