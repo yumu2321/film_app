@@ -13,3 +13,12 @@
         )
     end
     
+5.times do |n|
+    Post.create(
+        user_id: User.id,
+        title: "タイトル#{n + 1}",
+        star: "3",
+        review: "レビュー#{n + 1}"
+        )
+    end
+    
