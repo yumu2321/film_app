@@ -7,18 +7,17 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 5.times do |n|
-    User.create(
-        email: "test#{n + 1}@test.com", 
-        password: "password#{n + 1}"
-        )
-    end
+  User.create(
+    email: "test#{n + 1}@test.com", 
+    password: "password#{n + 1}"
+    )
+end
     
-5.times do |n|
-    Post.create(
-        user_id: User.id,
-        title: "タイトル#{n + 1}",
-        star: "3",
-        review: "レビュー#{n + 1}"
-        )
-    end
+User.all.each_with_index do |user, i|
+  user.posts.create!(
+    title: "タイトル#{i}",
+    star: rand(5),
+    review: "レビュー#{i}"
+    )
+end
     
