@@ -1,9 +1,6 @@
 class PostsController < ApplicationController
  
- def index
-  @posts = Post.order(created_at: :desc)
-  # 投稿順(最新順)にデータを表示させるようにする
-  end
+ 
   
   def new
     @post = Post.new

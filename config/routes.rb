@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   
   root to: "home#index"
   resources :posts, only: [:create, :new]
+  resources :users, only: :show
   
   resources :users do
     resource :relationships, only: [:create, :destroy]
