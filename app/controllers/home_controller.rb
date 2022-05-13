@@ -16,4 +16,8 @@ class HomeController < ApplicationController
     @posts = Post.all
   end
   
+  def show
+    @email = current_user.email
+    @posts = current_user.posts
+  end
 end
