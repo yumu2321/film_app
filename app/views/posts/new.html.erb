@@ -1,2 +1,49 @@
-<h1>Posts#new</h1>
-<p>Find me in app/views/posts/new.html.erb</p>
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>イチ推し映画</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+  <body>
+    <%= render "layouts/header" %>
+    <%= render "layouts/flash" %>
+    <main class="bg-home d-flex align-items-center w-100 h-100">
+        <div class="overlay">
+	        <div class="window">
+	            <h5>イチ推し映画投稿</h5>
+	          	<%= form_for (@post) do |f| %>
+  	          	<%= f.label :タイトル %><br>
+  	          	<%= f.text_field :title, :size=>"80", autofocus: true %>
+  		        <div class="review">
+                    <!-- 評価 -->
+                    <div class="form-group row" id="star">
+                    <%= f.label :star,'評価 ', class:'col-md-3 col-form-label' %><br>
+                    <%= f.hidden_field :star, id: :review_star %>
+                    </div>
+                
+                    <!-- 評価javascript -->
+                    <script>
+                    $('#star').raty({
+                        size     : 36,
+                        starOff:  '<%= asset_path('star-off.png') %>',
+                        starOn : '<%= asset_path('star-on.png') %>',
+                        scoreName: 'post[star]',
+                    });
+                    </script>  
+                    <%= f.label :レビュー %><br>
+                    <%= f.text_area :review, :size=>"90x10" %>
+                </div>
+                <!--<label class="close" for="pop-up">キャンセル</label>-->
+  		          <%= f.submit '投稿する', class:"btn btn-success" %>
+                <% end %>
+	        </div>
+        </div>
+    </main>
+    <%= render "layouts/footer" %>
+  </body>
+</html>

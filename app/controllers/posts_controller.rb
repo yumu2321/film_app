@@ -1,7 +1,5 @@
 class PostsController < ApplicationController
  
- 
-  
   def new
     @post = Post.new
   # 空のOutputインスタンスを生成する

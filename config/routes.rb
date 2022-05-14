@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  
+  get 'home/new' => 'home#new'
+  post 'home' => 'home#create'
   get 'relationships/followings'
   get 'relationships/followers'
   devise_for :users
