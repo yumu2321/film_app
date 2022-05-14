@@ -39,41 +39,10 @@
           <%= link_to "みんなのレビュー", destroy_user_session_path, method: :delete, class: "nav-link" %>
         </li>
         <li class="nav-item">
-          <%= link_to root_path ,class: "btn btn-light text-white", method: :get do %>
+          <%= link_to "/posts/new" ,class: "btn btn-light text-white", method: :get do %>
             <i class="fa fa-upload fa-2x nav-link"></i>
           <% end %>
-          <label class="open nav-link ml-3" for="pop-up">投稿</label>
-          <input type="checkbox" id="pop-up">
-          <div class="overlay">
-	          <div class="window">
-	          	<h5>イチ推し映画投稿</h5>
-	          	<%= form_for (@post) do |f| %>
-  	          	<%= f.label :タイトル %><br>
-  	          	<%= f.text_field :title, :size=>"80", autofocus: true %>
-  		          <div class="review">
-                    <!-- 評価 -->
-                  <div class="form-group row" id="star">
-                    <%= f.label :star,'評価 ', class:'col-md-3 col-form-label' %><br>
-                    <%= f.hidden_field :star, id: :review_star %>
-                  </div>
-                
-                  <!-- 評価javascript -->
-                  <script>
-                  $('#star').raty({
-                    size     : 36,
-                    starOff:  '<%= asset_path('star-off.png') %>',
-                    starOn : '<%= asset_path('star-on.png') %>',
-                    scoreName: 'post[star]',
-                  });
-                  </script>  
-                  <%= f.label :レビュー %><br>
-                  <%= f.text_area :review, :size=>"90x10" %>
-                </div>
-                <label class="close" for="pop-up">キャンセル</label>
-  		          <%= f.submit '投稿する', class:"btn btn-success" %>
-              <% end %>
-	          </div>
-          </div>
+          <%= link_to "投稿", "/posts/new", class: "nav-link ml-3" %>
         </li>
       </ul>
     </div>
