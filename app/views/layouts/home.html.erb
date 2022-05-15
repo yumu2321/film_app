@@ -16,14 +16,14 @@
       <%  if user_signed_in?  %>
       <!--投稿表示-->
       <% @posts.each do |post| %>
-          <p>タイトル</p>
-          <span><%= post.title %></span>
-          <p>評価</p>
-          <span><%= post.star %></span>
-          <p>レビュー</p>
-          <span><%= post.review %></span>
-        <% end %>
-        <%= yield %>
+        <p>タイトル</p><br><br>
+        <span><%= post.title %></span><br><br>
+        <p>評価</p><br><br>
+        <span><%= post.star %></span><br><br>
+        <p>レビュー</p><br><br>
+        <span><%= post.review %></span><br><br>
+      <% end %>
+      <%= yield %>
       <% else %>
       <% end %>
     </main>
