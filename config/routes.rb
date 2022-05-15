@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   root to: "home#index"
   resources :posts, only: [:create, :new, :edit, :update, :destroy]
   resources :users, only: :show
+  resource resource :profile, only: %i[show edit update]
   
   resources :users do
     resource :relationships, only: [:create, :destroy]
