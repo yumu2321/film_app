@@ -12,17 +12,22 @@
   <body>
     <%= render "layouts/header" %>
     <%= render "layouts/flash" %>
-    <div class="">
-      <p><%= @email %>さんのページ</p>
-        
-      <% @posts.each do |post| %>
-        <p>タイトル</p>
-        <span><%= post.title %></span>
-        <p>評価</p>
-        <span><%= post.star %></span>
-        <p>レビュー</p>
-        <span><%= post.review %></span>
-      <% end %>
-    </div>
+    <main class="bg-home d-flex align-items-center w-100 h-100">
+      <div class="">
+        <p><%= @email %>さんのページ</p>
+          
+        <% @posts.each do |post| %>
+          <span><%= post.user.email %></span>
+          <p>タイトル</p>
+          <span><%= post.title %></span>
+          <p>評価</p>
+          <span><%= post.star %></span>
+          <p>レビュー</p>
+          <span><%= post.review %></span><br>
+          <span><%= link_to "編集", edit_post_path(post) %></span>
+          <span><%= link_to "削除", post_path(post), method: :delete %></span><br>
+        <% end %>
+      </div>
+    </main>
   </body>
 </html>
