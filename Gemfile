@@ -70,3 +70,6 @@ gem 'jquery-rails'
 gem 'font-awesome-rails'
 
 gem 'pry-rails'
+
+gem 'carrierwave'
+gem 'mini_magick'
