@@ -1,28 +1,45 @@
 
-<h1>投稿編集</h1>
-<span>現在ログイン中のユーザー：<%= current_user.email %></span>
-<%= form_for(@post, url: post_path(@post)) do |f| %>
-    <div>
-        <%= f.label :タイトル %><br>
-        <%= f.text_field :title, autofocus: true, :placeholder =>"#{@post.title}" %>
-    </div>
-    <div class="form-group row" id="star">
-        <%= f.label :star,'評価 ', class:'col-md-3 col-form-label' %><br>
-        <%= f.hidden_field :star, :placeholder =>"#{@post.star}" %>
-        </div>
-                
-        <!-- 評価javascript -->
-        <script>
-        $('#star').raty({
-            size     : 36,
-            starOff:  '<%= asset_path('star-off.png') %>',
-            starOn : '<%= asset_path('star-on.png') %>',
-            scoreName: 'post[star]',
-        });
-        </script>  
-    <div>
-        <%= f.label :レビュー %><br>
-        <%= f.text_area :review, :placeholder =>"#{@post.review}" %>
-    </div>
-    <div><%= f.submit "更新する" %></div>
-<% end %>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>イチ推し映画</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+  <body>
+    <%= render "layouts/header" %>
+    <%= render "layouts/flash" %>
+    <main class="bg-home d-flex align-items-center w-100 h-100">
+        <h1>投稿編集</h1>
+        <span>現在ログイン中のユーザー：<%= current_user.email %></span>
+        <%= form_for(@post, url: post_path(@post)) do |f| %>
+            <div>
+                <%= f.label :タイトル %><br>
+                <%= f.text_field :title, autofocus: true, :placeholder =>"#{@post.title}" %>
+            </div>
+            <div class="form-group row" id="star">
+                <%= f.label :star,'評価 ', class:'col-md-3 col-form-label' %><br>
+                <%= f.hidden_field :star, :placeholder =>"#{@post.star}" %>
+                </div>
+                        
+                <!-- 評価javascript -->
+                <script>
+                $('#star').raty({
+                    size     : 36,
+                    starOff:  '<%= asset_path('star-off.png') %>',
+                    starOn : '<%= asset_path('star-on.png') %>',
+                    scoreName: 'post[star]',
+                });
+                </script>  
+            <div>
+                <%= f.label :レビュー %><br>
+                <%= f.text_area :review, :placeholder =>"#{@post.review}" %>
+            </div>
+            <div><%= f.submit "更新する" %></div>
+        <% end %>
+        </main>
+    </body>
+</html>
