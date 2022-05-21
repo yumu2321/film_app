@@ -16,6 +16,7 @@
       <%  if user_signed_in?  %>
       <!--投稿表示-->
       <% @posts.each do |post| %>
+      <%= link_to(post.user.email, "/users/#{post.user.id}") %>
         <p>タイトル</p><br><br>
         <span><%= post.title %></span><br><br>
         <p>評価</p><br><br>

@@ -24,7 +24,7 @@ class PostsController < ApplicationController
   def update
     @post = Post.find(params[:id])
     if @post.update(post_params)
-      redirect_to request.referer
+      redirect_to "/users/#{current_user.id}", success: "投稿を更新しました"
     else
       render :new
     end
