@@ -12,18 +12,21 @@
   <body>
     <%= render "layouts/header" %>
     <%= render "layouts/flash" %>
-    <main class="bg-home d-flex align-items-center w-100 h-100">
+    <main class="bg-home">
       <%  if user_signed_in?  %>
       <!--投稿表示-->
-      <% @posts.each do |post| %>
-      <%= link_to(post.user.email, "/users/#{post.user.id}") %>
-        <p>タイトル</p><br><br>
-        <span><%= post.title %></span><br><br>
-        <p>評価</p><br><br>
-        <span><%= post.star %></span><br><br>
-        <p>レビュー</p><br><br>
-        <span><%= post.review %></span><br><br>
-      <% end %>
+      <% @posts.each do |post| %><br>
+        <%= link_to(post.user.email, "/users/#{post.user.id}") %>
+          <div class="border-end border-bottom border-primary" >
+            <p>タイトル</p>
+            <span><%= post.title %></span>
+            <p>評価</p>
+            <span><%= post.star %></span>
+            <p>レビュー</p>
+            <span><%= post.review %></span><br>
+          </div>
+        <% end %>
+      </div>
       <%= yield %>
       <% else %>
       <% end %>
