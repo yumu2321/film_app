@@ -1,30 +1,23 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>イチ推し映画</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
   <body>
-    <%= render "layouts/header" %>
-    <%= render "layouts/flash" %>
-    <main class="bg-home d-flex align-items-center w-100 h-100">
+    <main class="bg-home">
       <!--ログイン本人のマイページ-->
       <%- if @user.id == @current_user.id %>
-      <p><%= @current_user.email %>さんのページ</p>
-      
+      <h3><%= current_user.nickname %>さんのページ</h3>
+      <tr>
+        <%=link_to "フォロー数: #{current_user.followings.count}", edit_profile_path, class: 'btn btn-info' %>
+        <%=link_to "フォロー数: #{current_user.followers.count}", edit_profile_path, class: 'btn btn-info' %>
+      </tr>
+      <!--プロフィール-->
       <% content_for(:title, 'プロフィール') %>
       <div class="container pt-3">
         <div class="row">
-          <div class="col-md-10 offset-md-1 mb-5">
-            <h1 class="float-left"><%= t('.プロフィール') %></h1>
+          <div class="col-md-10 mb-5">
+            <h4 class="float-left"><%= t('.プロフィール') %></h4>
             <%=link_to "編集", edit_profile_path, class: 'btn btn-success float-right' %>
             </div>
-            <div class="col-md-10 offset-md-1">
+            <div class="col-md-10">
               <table class="table">
                 <tbody>
                   <tr>
@@ -50,9 +43,10 @@
             </div>
           </div>
         </div>
+        <!--投稿一覧-->
         <div class="">
           <% @posts.each do |post| %>
-            <span><%= post.user.email %></span>
+            <span><%= post.user.nickname %></span>
             <p>タイトル</p>
             <span><%= post.title %></span>
             <p>評価</p>
@@ -65,56 +59,56 @@
         </div>
         <!--他人のマイページ-->
         <%- else %>
-        <p><%= @user.email %>さんのページ</p>
-        <!--フォローボタン-->
-        <% if current_user.following?(@user) %>
-        <%= link_to "フォロー外す", user_relationships_path(@user.id), method: :delete %>
-        <% else %>
-          <%= link_to "フォローする", user_relationships_path(@user.id), method: :post %>
-        <% end %>
-        
-        <% content_for(:title, 'プロフィール') %>
-        <div class="container pt-3">
-          <div class="row">
-            <div class="col-md-10 offset-md-1 mb-5">
-              <h1 class="float-left"><%= t('.プロフィール') %></h1>
-              </div>
-              <div class="col-md-10 offset-md-1">
-                <table class="table">
-                  <tbody>
-                    <tr>
-                      <th>
-                        <span>メールアドレス</span>
-                      </th>
-                      <td><%= @user.email %></td>
-                    </tr>
-                    <tr>
-                      <th>
-                        <span>ニックネーム</span>
-                      </th>
-                      <td><%= @user.nickname %></td>
-                    </tr>
-                    <tr>
-                      <th>
-                        <span>アバター</span>
-                      </th>
-                      <td><%= image_tag @user.avatar.url, size: '50x50', class: 'rounded-circle mr15' %></td>
-                    </tr>
-                  </tbody>
-                </table>
+          <p><%= @user.email %>さんのページ</p>
+          <!--フォローボタン-->
+          <% if current_user.following?(@user) %>
+            <%= link_to "フォロー外す", user_relationships_path(@user.id), method: :delete %>
+          <% else %>
+            <%= link_to "フォローする", user_relationships_path(@user.id), method: :post %>
+          <% end %>
+          
+          <% content_for(:title, 'プロフィール') %>
+          <div class="container pt-3">
+            <div class="row">
+              <div class="col-md-10 offset-md-1 mb-5">
+                <h1 class="float-left"><%= t('.プロフィール') %></h1>
+                </div>
+                <div class="col-md-10 offset-md-1">
+                  <table class="table">
+                    <tbody>
+                      <tr>
+                        <th>
+                          <span>メールアドレス</span>
+                        </th>
+                        <td><%= @user.email %></td>
+                      </tr>
+                      <tr>
+                        <th>
+                          <span>ニックネーム</span>
+                        </th>
+                        <td><%= @user.nickname %></td>
+                      </tr>
+                      <tr>
+                        <th>
+                          <span>アバター</span>
+                        </th>
+                        <td><%= image_tag @user.avatar.url, size: '50x50', class: 'rounded-circle mr15' %></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="">
-            <% @posts.each do |post| %>
-              <span><%= @user.email %></span>
-              <p>タイトル</p>
-              <span><%= post.title %></span>
-              <p>評価</p>
-              <span><%= post.star %></span>
-              <p>レビュー</p>
-              <span><%= post.review %></span><br>
-            <% end %>
+            <div class="">
+              <% @user.posts.each do |post| %>
+                <span><%= @user.email %></span>
+                <p>タイトル</p>
+                <span><%= post.title %></span>
+                <p>評価</p>
+                <span><%= post.star %></span>
+                <p>レビュー</p>
+                <span><%= post.review %></span><br>
+              <% end %>
         <% end %>
     </main>
   </body>

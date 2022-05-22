@@ -1,22 +1,22 @@
 
-<header class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+<header class="navbar navbar-expand-lg navbar-light bg-light">
   <%= link_to 'イチ推し映画', root_path, class: "navbar-brand" %>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <!--// もしユーザーがログインしているならば下記を表示-->
+    <%  if user_signed_in?  %>
     <div>
       <ul class="navbar-nav">
-  <!--// もしユーザーがログインしているならば下記を表示-->
-        <%  if user_signed_in?  %>
-         <span><%= current_user.email %>
-           <li class="nav-item">
-             <%= link_to "マイページ", "/users/#{current_user.id}", class: "nav-link" %>
-           </li>
-           <li class="nav-item">
-             <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "nav-link" %>
-           </li>
-         </span>
+        <span><%= current_user.nickname %></span><br><br>
+        
+        <li class="nav-item">
+         <%= link_to "マイページ", "/users/#{current_user.id}", class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+         <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "nav-link" %>
+        </li>
       </ul>
       
       <ul class="navbar-nav">
@@ -46,16 +46,16 @@
         </li>
       </ul>
     </div>
-    <ul class="navbar-nav mr-auto">
-<!--//ログインしていないのなら下記を表示-->
-      <% else %>
+    <!--//ログインしていないのなら下記を表示-->
+    <% else %>
+      <ul class="navbar-nav mr-auto">
         <li class="nav-item">
           <%= link_to "新規登録", new_user_registration_path, class: "nav-link" %>
         </li>
         <li class="nav-item">
           <%= link_to "ログイン", new_user_session_path, class: "nav-link" %>
         </li>
-      <% end %>
-    </ul>
+      </ul>
+    <% end %>
   </div>
 </header>
