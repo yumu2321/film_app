@@ -1,2 +1,12 @@
-<h1>Relationships#followings</h1>
-<p>Find me in app/views/relationships/followings.html.erb</p>
+<h1><%= t("title.followings") %></h1>
+
+<table>
+  <% @followings.each do |user| %>
+    <tr>
+      <td><%= link_to user.nickname, user_path(@user) %></td>
+      <td><%= image_tag user.avatar.url, size: '50x50', class: 'rounded-circle mr15' %></td>
+    </tr>
+  <% end %>
+</table>
+
+<%= link_to t("button.back"), user_path %>

@@ -1,7 +1,7 @@
 <h1><%= t("title.followers") %></h1>
 
 <table>
-  <% @followers.each do |user| %>
+  <% @followers.each do |users| %>
     <tr>
       <td>
         <% if user.avatar.attached? %>
