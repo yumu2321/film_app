@@ -29,7 +29,7 @@ Rails.application.routes.draw do
         get :followings, :followers
       end
     end
-    resource :user_icons, only: :destroy
+    resource :user_avatars, only: :destroy
     resources :relationships, only: %I[create destroy] # 追記
   end
   

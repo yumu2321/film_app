@@ -6,8 +6,8 @@
       <%- if @user.id == @current_user.id %>
       <h3><%= current_user.nickname %>さんのページ</h3>
       <tr>
-        <%=link_to "フォロー数: #{current_user.followings.count}", edit_profile_path, class: 'btn btn-info' %>
-        <%=link_to "フォロー数: #{current_user.followers.count}", edit_profile_path, class: 'btn btn-info' %>
+        <%=link_to "フォロー数: #{current_user.followings.count}", followings_user_path, class: 'btn btn-info' %>
+        <%=link_to "フォロワー数: #{current_user.followers.count}", followers_user_path, class: 'btn btn-info' %>
       </tr>
       <!--プロフィール-->
       <% content_for(:title, 'プロフィール') %>
@@ -101,7 +101,7 @@
             </div>
             <div class="">
               <% @user.posts.each do |post| %>
-                <span><%= @user.email %></span>
+                <span><%= @user.nickname %></span>
                 <p>タイトル</p>
                 <span><%= post.title %></span>
                 <p>評価</p>
